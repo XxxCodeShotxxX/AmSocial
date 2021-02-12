@@ -1,0 +1,12 @@
+{% macro form_render(f) -%}
+<div class="form-group" style="width: 25%;">
+    {{ f.label }}
+    {{ f (class="form-control") }}
+</div>
+{%- endmacro %}
+
+{% macro submitbut(f) -%}
+<div>
+    {{ f (class="btn btn-primary") }}
+</div>
+{% endmacro %}

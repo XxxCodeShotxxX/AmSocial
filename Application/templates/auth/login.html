@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %} {{title}} {% endblock %}
+{% from '_renderform.html' import form_render,submitbut %}
+
+{% block body %} 
+{% for er in form.errors %}
+<div>
+    {{ er }}
+</div>
+{% endfor %}
+
+<form action="/login" method="POST">
+    <div class="form-group" align="center">
+        <h1 align="center">Login</h1>
+        {{ form.csrf_token }}
+        {{ form_render(form.email) }}
+        {{ form_render(form.password) }}
+        {{ submitbut(form.submit) }}
+
+    </div>
+</form>
+{% endblock %}

@@ -1,11 +1,13 @@
-from os import urandom,environ
+from Application import APP_ROOT
+from os import urandom,environ,path
 
 class Config:
     DEBUG = False
     PORT = environ.get('PORT') or 5005
     SECRET_KEY = urandom(32)
     ENV = environ.get('ENV')
-    SQLALCHEMY_DATABASE_URI = "mysql://amine:test@localhost/mydatabase"
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI') or ('sqlite:///' + path.join(APP_ROOT, 'app.db'))
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class Dev(Config):
     DEBUG = True

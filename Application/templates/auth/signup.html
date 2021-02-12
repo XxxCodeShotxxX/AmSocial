@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% from '_renderform.html' import form_render,submitbut %}
+{% block title %} {{title}} {% endblock %}
+{% block body %} 
+
+<div align="center">
+<h1>Sign Up</h1>
+{{form_render(form.username)}}
+{{form_render(form.email)}}
+{{form_render(form.password)}}
+{{form_render(form.password_confirm)}}
+{{submitbut(form.submit)}}
+</div>
+{% endblock %}

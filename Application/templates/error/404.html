@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block body %} 
+
+<h1 align="center">Error</h1>
+<p align='center'>{{ error }}</p>
+<img src="{{url_for('static',filename='images/error.svg')}}" align='center' height="300px"
+style="margin-left:30%">
+{% endblock %}

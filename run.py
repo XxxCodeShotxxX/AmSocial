@@ -1,9 +1,8 @@
 import os
-from app import app
+from Application import App as app
 
 
 
 
 app.run(port=app.config['PORT'],
-        debug=app.config['DEBUG']
-)
+        debug=app.config['DEBUG'])

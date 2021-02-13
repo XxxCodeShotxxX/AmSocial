@@ -1,5 +1,35 @@
-{% extends "layout.html" %}
 
-{% block title %}Home{% endblock %}
-<br>
-{% block body %} <h1>Home</h1>{% endblock %}
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+{% if not current_user.is_authenticated %}
+<div class="container header">
+    <div class="row">
+        <div class="col-sm12- col-md-6 headingCode">
+            <h1><span>AmSocial,</span> Connect your world!</h1>
+        </div>
+        <div class="col-sm12- col-md-6 imgHeader">
+            <a href="#" class="thumbnail">
+                <img src="{{ url_for('static', filename='images/header_bg1.svg') }}" alt="header image">
+            </a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container showInfoCard">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/background.svg') }}" class="card-img-top" alt="background profile">
+        <div class="photo_profile_display">
+          <img src="{{  current_user.email}}">
+        </div>
+        <h3>{{ current_user.username }}</h3>
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% endblock %}

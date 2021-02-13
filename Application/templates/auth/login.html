@@ -1,23 +1,37 @@
 {% extends "layout.html" %}
 
-{% block title %} {{title}} {% endblock %}
-{% from '_renderform.html' import form_render,submitbut %}
+{% block title %}{{ title }}{% endblock %}
 
-{% block body %} 
-{% for er in form.errors %}
-<div>
-    {{ er }}
-</div>
-{% endfor %}
-
-<form action="/login" method="POST">
-    <div class="form-group" align="center">
-        <h1 align="center">Login</h1>
-        {{ form.csrf_token }}
-        {{ form_render(form.email) }}
-        {{ form_render(form.password) }}
-        {{ submitbut(form.submit) }}
-
+{% block body %}
+{% from '_renderform.html' import render_field %}
+  <div class="StyleForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 leftSide">
+          <img class="resetImg" src="{{ url_for('static', filename='images/logging.svg') }}" alt="login photo">
+        </div>
+        <div class="col-xs-12 col-sm-6 rightSide">
+          <h1>Login</h1>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="alert alert-danger">
+                {{ messages[0] }}
+              </div>
+            {% endif %}
+          {% endwith %}
+          <form action="{{ url_for('auth.login') }}" method='POST'>
+            <div class="form-group">
+              {{ form.csrf_token }}
+              {{render_field(form.email)}}
+              {{render_field(form.password)}}
+              
+              <div class="form-group">
+                {{ form.submit(class='btn btn-primay') }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-</form>
+  </div>
 {% endblock %}

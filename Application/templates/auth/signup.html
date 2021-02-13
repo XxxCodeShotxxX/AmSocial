@@ -1,14 +1,38 @@
 {% extends "layout.html" %}
-{% from '_renderform.html' import form_render,submitbut %}
-{% block title %} {{title}} {% endblock %}
-{% block body %} 
 
-<div align="center">
-<h1>Sign Up</h1>
-{{form_render(form.username)}}
-{{form_render(form.email)}}
-{{form_render(form.password)}}
-{{form_render(form.password_confirm)}}
-{{submitbut(form.submit)}}
-</div>
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+  <div class="StyleForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 leftSide">
+          <img class="" src="{{ url_for('static', filename='images/register.svg') }}" alt="register photo">
+        </div>
+        <div class="col-xs-12 col-sm-6 rightSide">
+          <h1>Register</h1>
+          {% from '_renderform.html' import render_field %}
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="alert alert-danger">
+                {{ messages[0] }}. Go to <a href="{{url_for('auth.login')}}">login page</a>
+              </div>
+            {% endif %}
+          {% endwith %}
+          <form action="{{ url_for('auth.signup') }}" method="POST">
+              {{ form.csrf_token }}
+            <div class="form-group">
+              {{ render_field(form.email) }}
+              {{ render_field(form.username) }}
+              {{ render_field(form.password) }}
+              {{ render_field(form.password_confirm) }}
+              <div class="form-group">
+                {{ form.submit(class='btn btn-primary') }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

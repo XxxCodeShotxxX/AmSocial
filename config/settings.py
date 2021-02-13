@@ -5,7 +5,7 @@ class Config:
     DEBUG = False
     PORT = environ.get('PORT') or 5005
     SECRET_KEY = urandom(32)
-    ENV = environ.get('ENV')
+    ENV = environ.get('FLASK_ENV')
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI') or ('sqlite:///' + path.join(APP_ROOT, 'app.db'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

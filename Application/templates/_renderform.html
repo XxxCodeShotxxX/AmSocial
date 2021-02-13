@@ -1,12 +1,17 @@
-{% macro form_render(f) -%}
-<div class="form-group" style="width: 25%;">
-    {{ f.label }}
-    {{ f (class="form-control") }}
-</div>
+{% macro render_field(field) -%}
+  <div class="form-group">
+    {{ field.label }}
+    {{ field(class='form-control', **kwargs) }}
+    {% for error in field.errors %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    {% endfor %}
+  </div>
 {%- endmacro %}
 
 {% macro submitbut(f) -%}
 <div>
-    {{ f (class="btn btn-primary") }}
+    {{ f (class="btn btn-primary" , **kwargs ) }}
 </div>
 {% endmacro %}
